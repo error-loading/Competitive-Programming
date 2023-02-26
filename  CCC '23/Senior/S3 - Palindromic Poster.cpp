@@ -1,5 +1,5 @@
-// https://dmoj.ca/problem/ccc07s5
-// CCC '07 S5 - Bowling for Numbers
+// https://dmoj.ca/problem/ccc23s3
+// CCC '23 S3 - Palindromic Poster
 
 /********   All Required Header Files ********/
 #include <array>
@@ -50,18 +50,29 @@ typedef vector<pi> vii;
 typedef vector<pl> vll;
 typedef vector<pii> viii;
 const int inf = 0x3F3F3F3F;
-const ll infl = 0x3F3F3F3F3F3F3F3FLL;
+//const ll infl = 0x3F3F3F3F3F3F3F3FLL;
 const int mod = 1e9 + 7;
 const int MM = 2003;
-int N, M, R, C, cntR, cntC; char g[MM][MM];
+int N, M, R, C, cntR = 0, cntC = 0; char g[MM][MM];
 
 void fail() { cout << "IMPOSSIBLE" << endl; exit(0);}
-// int checkR(int i) {
-//     for ()
-// }
+int checkR(int i) {
+    for (int l = 1; l<=M; l++) {
+        if (g[i][l] != g[i][M - l]) return 0;
+    }
+    return 1;
+}
+
+int checkC(int i) {
+    for (int l = 1; l<=N; l++) {
+        if (g[l][i] != g[N - l][i]) return 0;
+    }
+    return 1;
+}
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0);
+    cin >> N >> M >> R >> C;
     memset(g, 'a', sizeof g);
     for (int i = R+1; i<=N; i++) g[i][M] = g[i][1] + 1;
     for (int i = C+1; i<=M; i++) g[N][i] = g[1][i] + 1;
@@ -79,14 +90,12 @@ int main() {
         if (N % 2 == 0 && R % 2 != 0) fail();
         for (int i = 1; i<= N; i++) {
             if (i <= R/2 || i> N-R/2) g[i][M] = g[i][1];
-            else g[i][M] = g[1][i] + 1;
+            else g[i][M] = g[i][1] + 1;
         }
         if(R % 2) g[(N+1)/2][M] = g[(N+1)/2][1];
     }
 
-    // for(int i=1; i<=N; i++) cntR += checkR(i);
-    // for(int i=1; i<=M; i++) cntR += checkC(i);
-    // if (cntR != R || cntC != C) fail();
+
 
     for (int i = 1; i<=N; i++) {
         for (int j = 1; j<= M; j++) {
@@ -94,6 +103,11 @@ int main() {
         }
         cout << endl;
     }
+
+    for(int i=1; i<=N; i++) cntR += checkR(i);
+    for(int i=1; i<=M; i++) cntC += checkC(i);
+    cout << cntR << " " << cntC << endl;
+    if (cntR != R || cntC != C) fail();
 
     return 0;
 }
