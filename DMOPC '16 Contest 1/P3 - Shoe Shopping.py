@@ -1,20 +1,15 @@
-# https://dmoj.ca/problem/dmopc16c1p3
-# DMOPC '16 Contest 1 P3 - Shoe Shopping
-
 n = int(input())
 arr = [int(i) for i in input().split()]
+dp = [float('inf') for i in range(n+1)]
+dp[0] = 0
+dp[1] = arr[0]
 
-dp = arr[:]
+for i in range(n+1):
+    if i+1 <= n:
+        dp[i+1] = min(dp[i+1], dp[i] + arr[i])
+    if i + 2 <= n:
+        dp[i+2] = min(dp[i+2], dp[i] + min(arr[i], arr[i+1]) / 2 + max(arr[i], arr[i+1]))
+    if i + 3 <= n:
+        dp[i+3] = min(dp[i+3], dp[i] + arr[i] + arr[i+1] + arr[i+2] - min(arr[i], arr[i+1], arr[i+2]))
 
-for i in range(1,n):
-    dp[i]+= dp[i-1]
-
-dp.insert(0,0)
-
-for i in range(1,n+1):
-    if i-2>=0:
-        dp[i] = min(dp[i], dp[i-3] + arr[i-1] + arr[i-2] + arr[i-3] - min(arr[i-1], arr[i-2], arr[i-3]))
-    if i-1>=0:
-        dp[i] = min(dp[i], dp[i-2] + arr[i-1]+arr[i-2] - min(arr[i-1]/2, arr[i-2]/2))
-
-print(round(float(dp[-1]),1))
+print("{price:.1f}".format(price = dp[-1]))
