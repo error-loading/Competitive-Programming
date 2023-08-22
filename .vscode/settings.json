@@ -5,6 +5,17 @@
     "regex": "cpp",
     "sstream": "cpp",
     "ios": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "stack": "cpp",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "barrier": "cpp",
+    "chrono": "cpp",
+    "latch": "cpp",
+    "limits": "cpp",
+    "random": "cpp",
+    "semaphore": "cpp",
+    "valarray": "cpp",
+    "algorithm": "cpp"
   }
 }
