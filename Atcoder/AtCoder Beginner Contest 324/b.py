@@ -1,0 +1,13 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+
+while N%2 == 0:
+    N/=2
+
+while N%3 == 0:
+    N/=3
+
+if N > 1: print("No")
+else: print("Yes")
